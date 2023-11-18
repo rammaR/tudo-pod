@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume
+spec:
+  containers:
+    - name: nginx-container
+      image: nginx
+      volumeMounts:
+        - mountPath: /rails_app
+          name: artemisvolume
+    - name: jenkins-container
+      image: jenkins:alpine
+      volumeMounts:
+        - mountPath: /rails_app
+          name: artemisvolume
+  volumes:
+    - name: artemisvolume
+      hostPath:
+        path: D:/cmder/workspace/pods/volumes
+        type: DirectoryOrCreate
