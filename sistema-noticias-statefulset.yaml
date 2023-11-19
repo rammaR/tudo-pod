@@ -10,6 +10,13 @@ spec:
         app: sistema
         name: sistema
     spec:
+      volumes:
+        - name: imagens
+          persistentVolumeClaim:
+            claimName: imagens-pvc
+        - name: sessao
+          persistentVolumeClaim:
+            claimName: sessao-pvc
       containers:
         - name: sistema-noticias-container
           image: aluracursos/sistema-noticias:1
@@ -18,6 +25,18 @@ spec:
           envFrom:
             - configMapRef:
                 name: sistema-configmap
+          volumeMounts:
+            - name: imagens
+              mountPath: /var/www/html/uploads
+            - name: sessao
+              mountPath: /tmp
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+            failureThreshold: 3
+            initialDelaySeconds: 20
   selector:
     matchLabels:
       app: sistema
