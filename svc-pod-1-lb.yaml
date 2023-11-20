@@ -6,6 +6,6 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      nodePort: 30000
+      nodePort: 30005
   selector:
     app: primeiro-pod
