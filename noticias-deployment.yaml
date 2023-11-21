@@ -34,9 +34,6 @@ spec:
           resources: #Aqui digo qnt de recurso preciso reservar pra esse pod
             requests: #Cada pod que tenha um container vai gastar 10 milicore de CPU
               cpu: 10m
-          resources: #necessário para autoscalling
-            requests:
-              cpu: 10m
   replicas: 3
   selector:
     matchLabels:
